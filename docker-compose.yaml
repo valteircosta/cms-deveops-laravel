@@ -29,6 +29,7 @@ services:
     tty: true
     ports:
       - "3306:3306"
+    #Volume do banco de dados
     volumes:
       - ./.docker/db/mysql:/var/lib/mysql
     environment:
