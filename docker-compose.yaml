@@ -1,4 +1,4 @@
-version: "3"
+version: "2.2"
 
 services:
   app:
@@ -9,6 +9,11 @@ services:
     #Rede a qual perrence o containner
     networks:
       - app-network
+    #Determina a condicao para levantar o serviço
+    depends_on:
+      db:
+        condition: service_healthy
+
   nginx:
     build: .docker/nginx
     container_name: nginx
@@ -20,6 +25,7 @@ services:
       - .:/var/www
     networks:
       - app-network
+
   db:
     image: mysql:5.7
     #Comando que evita erros (Se não usar é muito choro e ranger de dentes para programador)
@@ -38,6 +44,18 @@ services:
       - MYSQL_USER=root
     networks:
       - app-network
+    healthcheck:
+      test: "exit 0"
+      #   [
+      #     "CMD-SHELL",
+      #     'mysql -uroot --database=laravel --password=root --execute="SELECT count(table_name) > 0 FROM information_schema.tables;" --skyp-column-names -B',
+      #   ]
+      #Intervalo se espera
+      interval: 10s
+      timeout: 10s
+      #Quant de tentativas
+      retries: 4
+
   redis:
     image: redis:alpine
     expose:
