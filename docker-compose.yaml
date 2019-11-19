@@ -46,13 +46,15 @@ services:
       - app-network
     healthcheck:
       test:
-      # "exit 0"
+        # Se descomento este e comento o outro funciona
+        # "exit 0"
+        #Já retirei a virgula no final [.. -B,] e não funcionou do mesmo jeito
         [
           "CMD-SHELL",
-          'mysql -uroot --database=laravel --password=root --execute="SELECT count(table_name) > 0 FROM information_schema.tables;"',
+          'mysql -uroot --database=laravel --password=root --execute="SELECT count(table_name) > 0 FROM information_schema.tables;" --skyp-column-names -B',
         ]
-      Intervalo se espera
-      interval: 10s
+      # Intervalo se espera
+      interval: 30s
       timeout: 10s
       #Quant de tentativas
       retries: 4
