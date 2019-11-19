@@ -45,12 +45,13 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: "exit 0"
-      #   [
-      #     "CMD-SHELL",
-      #     'mysql -uroot --database=laravel --password=root --execute="SELECT count(table_name) > 0 FROM information_schema.tables;" --skyp-column-names -B',
-      #   ]
-      #Intervalo se espera
+      test:
+      # "exit 0"
+        [
+          "CMD-SHELL",
+          'mysql -uroot --database=laravel --password=root --execute="SELECT count(table_name) > 0 FROM information_schema.tables;"',
+        ]
+      Intervalo se espera
       interval: 10s
       timeout: 10s
       #Quant de tentativas
