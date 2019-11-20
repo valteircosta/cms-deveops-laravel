@@ -6,6 +6,7 @@ services:
   app:
     build: .
     container_name: app
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 50s ./.docker/entrypoint.sh
     volumes:
       - .:/var/www
     #Rede a qual perrence o containner
