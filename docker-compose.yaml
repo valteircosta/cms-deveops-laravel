@@ -1,3 +1,6 @@
+# O docker-compose versão 3  é mais avançado e superior em integração
+# com swarm,kubernetes etec
+
 version: "3"
 
 services:
@@ -9,9 +12,11 @@ services:
     #Rede a qual perrence o containner
     networks:
       - app-network
-    #Determina a condicao para levantar o serviço
+    #Aqui agora apenas garante a ordem de criação dos serviços
+    #Caberá
     depends_on:
       - db
+      - redis
 
   nginx:
     build: .docker/nginx
@@ -24,6 +29,9 @@ services:
       - .:/var/www
     networks:
       - app-network
+    # O nfinx será criado depois do app
+    depends_on:
+      - app
 
   db:
     image: mysql:5.7
@@ -43,22 +51,8 @@ services:
       - MYSQL_USER=root
     networks:
       - app-network
-    healthcheck:
-      test:
-        # Se descomento este e comento o outro funciona
-        # "exit 0"
-        #Já retirei a virgula no final [.. -B,] e não funcionou do mesmo jeito
-        [
-          "CMD-SHELL",
-          'mysql -uroot --database=laravel --password=root --execute="SELECT count(table_name) > 0 FROM information_schema.tables;" --skyp-column-names -B',
-        ]
-      # Intervalo se espera
-      interval: 30s
-      timeout: 10s
-      #Quant de tentativas
-      retries: 4
 
-  redis:
+    redis:
     image: redis:alpine
     expose:
       - 6379
