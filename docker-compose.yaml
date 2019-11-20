@@ -1,6 +1,5 @@
 # O docker-compose versão 3  é mais avançado e superior em integração
 # com swarm,kubernetes etec
-
 version: "3"
 
 services:
@@ -13,7 +12,6 @@ services:
     networks:
       - app-network
     #Aqui agora apenas garante a ordem de criação dos serviços
-    #Caberá
     depends_on:
       - db
       - redis
@@ -35,14 +33,14 @@ services:
 
   db:
     image: mysql:5.7
-    #Comando que evita erros (Se não usar é muito choro e ranger de dentes para programador)
+    # Comando que evita erros (Se não usar é muito choro e ranger de dentes para programador)
     command: --innodb-use-native-aio=0
     container_name: db
     restart: always
     tty: true
     ports:
       - "3306:3306"
-    #Volume do banco de dados
+    # Volume do banco de dados
     volumes:
       - ./.docker/db/mysql:/var/lib/mysql
     environment:
@@ -52,7 +50,7 @@ services:
     networks:
       - app-network
 
-    redis:
+  redis:
     image: redis:alpine
     expose:
       - 6379
@@ -61,6 +59,6 @@ services:
 
 #Construção da rede
 networks:
-  #Nome e configuração da rede
+  # Nome e configuração da rede
   app-network:
     driver: bridge
