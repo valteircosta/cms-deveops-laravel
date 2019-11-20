@@ -11,7 +11,7 @@ services:
       - app-network
     #Determina a condicao para levantar o serviço
     depends_on:
-      - db:
+      - db
 
   nginx:
     build: .docker/nginx
