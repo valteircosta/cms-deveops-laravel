@@ -6,7 +6,8 @@ services:
   app:
     build: .
     container_name: app
-    entrypoint: dockerize -wait tcp://db:3306 -timeout 50s ./.docker/entrypoint.sh
+    # Passando params para dockerize copy tamplate, aguarda conexão db e rodar script entrupoint.sh
+    entrypoint: dockerize -template ./.docker/app/.env:.env -wait tcp://db:3306 -timeout 50s ./.docker/entrypoint.sh
     volumes:
       - .:/var/www
     #Rede a qual perrence o containner
