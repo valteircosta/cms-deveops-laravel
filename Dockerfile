@@ -12,6 +12,12 @@ RUN docker-php-ext-install pdo pdo_mysql
 WORKDIR /var/www
 RUN rm -rf /var/www/html
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# O que é raealizado aqui no Docker file pertenxe a imagem criada  e não ao volume compartilhado
+# Devemos ter bem claro este conceito para as coisas funvionarem corretamente
+# O copy abaixo é um exemplo, ele coloca os arquivos na imagem e não no volume compartilhado
+
+# COPY . /var/www
 # RUN  composer install && \
 #     cp .env.example .env && \
 #     php artisan key:generate && \
