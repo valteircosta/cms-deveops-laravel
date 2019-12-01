@@ -10,4 +10,4 @@ steps:
   # docker-compose-cloudbuild.yam -> nome do arquivo
   # up -> comando para subir container
   # -d -> container em modo daemon
-  args:['-f','docker-compose-cloudbuild.yam','up','-d']
+  args: ['-f','docker-compose-cloudbuild.yaml','up','-d']
