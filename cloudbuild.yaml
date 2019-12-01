@@ -1,13 +1,20 @@
 # Este arquivo será lido pelo Google Cloud Plataform - GCP
-
 steps:
+
 - id: "Rodando docker-compose"
 # Informa a imagem do docker cloufbuilder que sera usada
-  name: 'gcr.io/$PROJECT_ID/docker-compose'
-
+  name: 'gcr.io/$PROJECT_ID/docker-compose:1.24.0'
   # Passa os argumentos para execução do docker
   # -f -> vai inforar nome do arquivo docker-compos.yaml
   # docker-compose-cloudbuild.yam -> nome do arquivo
   # up -> comando para subir container
   # -d -> container em modo daemon
   args: ['-f','docker-compose.cloudbuild.yaml','up','-d']
+
+- id: "Rodando docker ps"
+  # Informa o comando que será executado.
+  # Atenção para para o nome da imagem utilizada
+  name: 'gcr.io/cloud-builders/docker'
+  # Passa os argumentos para execução do docker
+  args: ['ps']
+
