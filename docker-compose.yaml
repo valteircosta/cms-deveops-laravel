@@ -1,5 +1,5 @@
 # O docker-compose versão 3  é mais avançado e superior em integração
-# com swarm,kubernetes etec
+# com swarm,kubernetes etc
 version: "3"
 
 services:
