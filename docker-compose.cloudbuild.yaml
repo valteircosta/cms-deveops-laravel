@@ -8,7 +8,7 @@ services:
     container_name: app
     # Passando params para dockerize copy tamplate, aguarda conexão db e rodar script entrupoint.sh
     # entrypoint: dockerize -template ./.docker/app/.env:.env -wait tcp://db:3306 -timeout 50s ./.docker/entrypoint.sh
-    # # # valor da variáveis p/ template
+    # valor da variáveis p/ template
     # environment:
     #   - DB_HOST=db
     #   - DB_DATABASE=laravel
