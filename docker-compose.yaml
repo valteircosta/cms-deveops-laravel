@@ -41,7 +41,7 @@ services:
 
   db:
     image: mysql:5.7
-    # Comando que evita erros (Se não usar é muito choro e ranger de dentes para programador)
+    # Comando que evita erros (Se não usar é muito choro e ranger de dentes para o programador)
     command: --innodb-use-native-aio=0
     container_name: db
     restart: always
