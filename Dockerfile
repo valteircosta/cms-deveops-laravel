@@ -13,7 +13,7 @@ WORKDIR /var/www
 RUN rm -rf /var/www/html
 RUN ln -s public html
 # O que é raealizado aqui no Docker file pertenxe a imagem criada  e não ao volume compartilhado
-# Devemos ter bem claro este conceito para as coisas funvionarem corretamente
+# Devemos ter bem claro este conceito para as coisas funcionarem corretamente
 # O copy abaixo é um exemplo, ele coloca os arquivos na imagem e não no volume compartilhado
 
 # COPY . /var/www
