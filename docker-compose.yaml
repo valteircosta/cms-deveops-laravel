@@ -30,7 +30,7 @@ services:
     restart: always
     tty: true
     ports:
-      - "8000:80"
+      - "8080:80"
     volumes:
       - .:/var/www
     networks:
