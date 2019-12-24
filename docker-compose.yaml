@@ -4,6 +4,7 @@ version: "3"
 
 services:
   app:
+    # Indica ao caminho do arquivo de construção Dockerfile
     build: .
     container_name: app
     # Passando params para dockerize copy tamplate, aguarda conexão db e rodar script entrypoint.sh
@@ -25,9 +26,13 @@ services:
       - redis
 
   nginx:
+    # Indica ao caminho do arquivo de construção Dockerfile
     build: .docker/nginx
+    # Nome do container
     container_name: nginx
+    # Reiniciar caso o container cair
     restart: always
+    # Libera a entrada de forma interativa no container (bash e outros,)
     tty: true
     ports:
       - "8080:80"
