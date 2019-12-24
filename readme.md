@@ -30,4 +30,4 @@ depois verifique se os containers subiram:
 $ docker-compose ps
 ```
 
-O projeto estará rodando em: [http://localhost:8080/](http://localhost:8080/).
+O projeto estará rodando em: [http://localhost:8000/](http://localhost:8000/).
