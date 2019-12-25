@@ -8,7 +8,9 @@ services:
     build: .
     container_name: app
     # Passando params para dockerize copy tamplate, aguarda conexão db e rodar script entrypoint.sh
-    entrypoint: dockerize -template ./.docker/app/.env:.env -wait tcp://db:3306 -timeout 50s ./.docker/entrypoint.sh
+    entrypoint: dockerize -template ./.docker/app/.env:.env -wait tcp://db:3306 -timeout 90s ./.docker/entrypoint.sh
+    ports:
+      - "9000"
     # valor da variáveis p/ template
     environment:
       - DB_HOST=db
@@ -16,11 +18,12 @@ services:
       - DB_USERNAME=root
       - DB_PASSWORD=root
     volumes:
-      - .:/var/www
-    #Rede a qual perrence o containner
+      - .:/var/www:rw,cached
+      - ./.docker/app/log:/var/log:rw,cached
+    #Rede a qual pertence o containner
     networks:
       - app-network
-    #Aqui agora apenas garante a ordem de criação dos serviços
+    # Aqui agora apenas garante a ordem de criação dos serviços
     depends_on:
       - db
       - redis
@@ -30,14 +33,21 @@ services:
     build: .docker/nginx
     # Nome do container
     container_name: nginx
+    # Passa configuração  e faz teste de conexão para com o app
+    entrypoint: dockerize -template ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf -wait tcp://app:9000 nginx -g "daemon off;"
     # Reiniciar caso o container cair
     restart: always
     # Libera a entrada de forma interativa no container (bash e outros,)
     tty: true
     ports:
       - "8000:80"
+    # Variavéis para endereço app
+    environment:
+      - NGINX_HOST=app
+      - NGINX_PORT=9000
     volumes:
       - .:/var/www
+      - ./.docker/nginx/log:/var/log/nginx:rw,cached
     networks:
       - app-network
     # O nfinx será criado depois do app
@@ -55,7 +65,9 @@ services:
       - "3306:3306"
     # Volume do banco de dados
     volumes:
-      - ./.docker/db/mysql:/var/lib/mysql
+      - ./.docker/database/dumps:/dumps:rw,cached
+      - ./.docker/database/data:/var/lib/mysql:rw,cached
+      - ./.docker/database/config:/etc/mysql/conf.d:rw,cached
     environment:
       - MYSQL_DATABASE=laravel
       - MYSQL_ROOT_PASSWORD=root
@@ -66,8 +78,12 @@ services:
   redis:
     image: redis:alpine
     container_name: redis
-    expose:
-      - 6379
+    restart: always
+    tty: true
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./.docker/redis:/data:rw,cached
     networks:
       - app-network
 
