@@ -34,7 +34,7 @@ services:
     # Nome do container
     container_name: nginx
     # Passa configuração  e faz teste de conexão para com o app
-    entrypoint: dockerize -template ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf -wait tcp://app:9000 nginx -g "daemon off;"
+    entrypoint: dockerize -template ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf -wait tcp://app:9000  -timeout 90s nginx -g "daemon off;"
     # Reiniciar caso o container cair
     restart: always
     # Libera a entrada de forma interativa no container (bash e outros,)

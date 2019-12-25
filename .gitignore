@@ -10,4 +10,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .docker/database
+.docker/redis
+.docker/nginx/log
+.docker/app/log
 .vscode/
