@@ -8,9 +8,10 @@ services:
     build: .
     container_name: app
     # Passando params para dockerize copy tamplate, aguarda conexão db e rodar script entrypoint.sh
-    entrypoint: dockerize -template ./.docker/app/.env:.env -wait tcp://db:3306 -timeout 90s ./.docker/entrypoint.sh
+    entrypoint: dockerize -template ./.docker/app/.env:.env -wait tcp://db:3306 -timeout 60s ./.docker/entrypoint.sh
     ports:
       - "9000"
+
     # valor da variáveis p/ template
     environment:
       - DB_HOST=db
@@ -34,8 +35,8 @@ services:
     # Nome do container
     container_name: nginx
     # Passa configuração  e faz teste de conexão para com o app
-    entrypoint: dockerize -template ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf -wait tcp://app:9000  -timeout 90s nginx -g "daemon off;"
-    # Reiniciar caso o container cair
+    entrypoint: dockerize -template ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf  -wait tcp://app:9000 nginx -g "daemon off;"
+   # Reiniciar caso o container cair
     restart: always
     # Libera a entrada de forma interativa no container (bash e outros,)
     tty: true
