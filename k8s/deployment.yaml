@@ -1,0 +1,20 @@
+apiVersion: apps/v1beta1
+# Tipo do objeto
+kind: Deployment
+metadata:
+  name: hello-nginx
+# Até aqui especifiva o deployment
+spec:
+  # Abaixo de template começa a especificação do pod
+  template:
+    metadata:
+      # Serve para localizar o pod
+      labels:
+        app: hello-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.17-alpine
+          ports:
+            - containerPort: 80
+  # Temina objeto template
