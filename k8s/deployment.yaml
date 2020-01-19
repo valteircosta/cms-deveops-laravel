@@ -5,7 +5,7 @@ metadata:
   name: hello-nginx
 # Até aqui especifiva o deployment
 spec:
-  # Abaixo de template começa a especificação do pod
+  # Abaixo de template começa a especifigitcação do pod
   template:
     metadata:
       # Serve para localizar o pod
