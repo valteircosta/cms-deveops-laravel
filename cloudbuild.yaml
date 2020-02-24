@@ -30,14 +30,14 @@ steps:
     args: ["exec", "-t", "app", "composer", "install"]
 
   - id: "Copiando arquivo .env"
-    name: "gcr.io/cloud-builders/docker"
+    name: "gcr.io/cloud-builders/docker"f
     args: ["exec", "-t", "app", "cp", ".env.example", ".env"]
 
   - id: "Rodando key:generate"
     name: "gcr.io/cloud-builders/docker"
     args: ["exec", "-t", "app", "php", "/var/www/artisan", "key:generate"]
 
-  - id: "Rodando migrates"
+  - id: "Rodando migrate c/ artisan"
     name: "gcr.io/cloud-builders/docker"
     args: ["exec", "-t", "app", "php", "/var/www/artisan", "migrate"]
 
