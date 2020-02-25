@@ -6,6 +6,7 @@ spec: #configuracoes do deployment e nao do POD
   selector:
     matchLabels:
       app: hello-nginx
+  replicas:3
   template: #aqui eu uso o modelo de um POD para meu deployment criar
     metadata:
       labels:
