@@ -19,3 +19,11 @@ $ kubectl apply -f deployment.yaml
 ```
 $ kubectl apply -f service.yaml
 ```
+## Chamando get pods
+```
+$ kubectl get pods
+``` 
+## Chamando get deployments
+```
+$ kubctl get deployments
+```
