@@ -27,3 +27,8 @@ $ kubectl get pods
 ```
 $ kubctl get deployments
 ```
+``` 
+## Chamando get services
+``` 
+$ kubctl get services
+``` 
