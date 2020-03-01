@@ -1,0 +1,22 @@
+# Executando o arquivo pode
+# kubectl apply -f configmap.yaml
+
+#Versão a api do kubernet
+apiVersion: v1
+# Tipo do objeto => configmap
+kind: ConfigMap
+# Define = >
+metadata:
+  name: nginx-conf
+data:
+  # Key e Value após pipe colocar toda configuração
+  nginx.conf: |
+
+    server {
+      listen 80;
+      index index.php index.html;
+      root /usr/share/nginx/html;
+
+      rewrite ^/google$ http://google.com permanent;
+    }
+

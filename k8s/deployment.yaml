@@ -17,3 +17,18 @@ spec: #configuracoes do deployment e nao do POD
         image: nginx:1.17-alpine
         ports:
         - containerPort: 80
+        # Monta os volumes no containner
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: nginx-conf
+          readOnly: true
+
+      #configura os volume
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: nginx-conf
+          items:
+            - key : nginx.conf
+              # Qdo montado qual será o nome do arquivo
+              path: nginx.conf
