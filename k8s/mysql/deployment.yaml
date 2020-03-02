@@ -20,7 +20,7 @@ spec: # spec do deployment
       - image: mysql:5.7
         name: mysql-server
         args: # Evita erro com arquivo lost found
-          - "--ignore"
+          - "--ignore-db-dir=lost+found"
 
         env: # Variáveis de ambiente
         - name: MYSQL_ROOT_PASSWORD
