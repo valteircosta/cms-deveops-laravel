@@ -24,7 +24,11 @@ spec: # spec do deployment
 
         env: # Variáveis de ambiente
         - name: MYSQL_ROOT_PASSWORD
-          value: root
+          valueFrom: # Origem da passwor
+            secretKeyRef:
+              name: mysq-pass # nome do secret
+              key: password # chave que contem o valor
+
         ports:
         - containerPort: 3306
         volumeMounts: # Monta o volume efetivamente
