@@ -37,7 +37,9 @@ $ kubectl get services
 ``` 
 $ kubectl create secret generic mysql-pass --from-literal=password='a1s2d3f4'
 ``` 
-## chamando get secrets
+## entrar no serviço usando docker
 ``` 
 $ kubectl get secrets 
+``` 
+kubectl exec -it mysql-server-7dc4ffc46f-czbz9  bash  
 ``` 
