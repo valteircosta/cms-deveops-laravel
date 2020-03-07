@@ -17,6 +17,16 @@ spec: #configuracoes do deployment e nao do POD
         image: nginx:1.17-alpine
         ports:
         - containerPort: 80
+        # Configuração de recurso do pod
+        resources:
+          requests: # Quantidade minima para funcionar cada pod
+            memory: "100Mi"
+            cpu: "200m"
+          limits: # Quantidade máxima que o pod irá utilizar
+            memory: "200Mi"
+            cpu: "250m"
+
+
         # Monta os volumes no containner
         volumeMounts:
         - mountPath: /etc/nginx/conf.d
