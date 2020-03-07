@@ -28,6 +28,11 @@ $ kubectl get pods
 $ kubectl get deployments
 ```
 ``` 
+## Chamando delete  service / deployments
+``` 
+$ kubectl delete service metadata_name_service
+$ kubectl delete deployment metadata_name_deployment
+``` 
 ## Chamando get services
 ``` 
 $ kubectl get services
