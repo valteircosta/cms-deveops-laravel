@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-nginx
+spec: #configuracoes do deployment e nao do POD
+  selector:
+    matchLabels:
+      app: hello-nginx
+  replicas: 3
+  template: #aqui eu uso o modelo de um POD para meu deployment criar
+    metadata:
+      labels:
+        app: hello-nginx
+    spec: #spec do meu POD
+      containers:
+      - name: nginx
+        image: nginx:1.17-alpine
+        ports:
+        - containerPort: 80
+        # Configuração de recurso do pod
+        resources:
+          requests: # Quantidade minima para funcionar cada pod
+            memory: "100Mi"
+            cpu: "200m"
+          limits: # Quantidade máxima que o pod irá utilizar
+            memory: "200Mi"
+            cpu: "250m"
+
+
+        # Monta os volumes no containner
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: nginx-conf
+          readOnly: true
+
+      #configura os volume
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: nginx-conf
+          items:
+            - key : nginx.conf
+              # Qdo montado qual será o nome do arquivo
+              path: nginx.conf

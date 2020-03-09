@@ -1,0 +1,18 @@
+# Executando o arquivo pode
+# kubectl apply -f pod.yaml
+
+#Versão a api do kubernet
+apiVersion: v1
+# Tipo do objeto => pod
+kind: Pod
+# Define = >
+metadata:
+  name: pod-exemplo
+# Especificaçãoes do objeto
+spec:
+  # Container pode qtos quiser, via de regra somente um
+  containers:
+    - name: pod-exemplo
+      # Endereço a imagem a ser usada
+      # Pode usar endereço completo, possibilitando imagens de serviço tipo GCC e outros
+      image: nginx:1.17-alpine

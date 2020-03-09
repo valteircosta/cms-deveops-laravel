@@ -1,0 +1,13 @@
+apiVersion: v1
+# Objeto que solicita ao kubernet um espaço em disco para armazenamento
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi # Solicita 20 giga de espaço
+
+

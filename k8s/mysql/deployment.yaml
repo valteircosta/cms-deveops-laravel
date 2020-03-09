@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-server
+spec: # spec do deployment
+  replicas: 1
+
+  selector: # Selector utilizado na criação do service
+    matchLabels:
+      app: mysql-server
+      tier: db
+
+  template: # template do Pod
+    metadata:
+      labels:
+        app: mysql-server
+        tier: db
+    spec: # spec do Pod
+      containers:
+      - image: mysql:5.7
+        name: mysql-server
+        args: # Evita erro com arquivo lost found
+          - "--ignore-db-dir=lost+found"
+
+        env: # Variáveis de ambiente
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom: # Origem da passwor
+            secretKeyRef:
+              name: mysql-pass # nome do secret
+              key: password # chave que contem o valor
+
+        ports:
+        - containerPort: 3306
+        volumeMounts: # Monta o volume efetivamente
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+
+      # Definição volume no nivel de container
+      volumes:
+      - name: mysql-persistent-storage # nomeia o volume
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
+
+
+
+
+
