@@ -41,8 +41,3 @@ spec:
   selector:
     app: redis-master
     role: master
-
-
-
-
-
