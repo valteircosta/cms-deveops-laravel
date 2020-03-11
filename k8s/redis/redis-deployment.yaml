@@ -19,8 +19,8 @@ spec: # spec do deployment
 
     spec: # spec do Pod
       containers:
-      - image: master
-        name: redis
+      - image: redis
+        name: master
 
         ports:
         - containerPort: 6379
