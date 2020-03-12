@@ -24,7 +24,7 @@ spec: # spec do deployment
 
         env: # Variáveis de ambiente
         - name: MYSQL_ROOT_PASSWORD
-          valueFrom: # Origem da passwor
+          valueFrom: # Origem da password
             secretKeyRef:
               name: mysql-pass # nome do secret
               key: password # chave que contem o valor
