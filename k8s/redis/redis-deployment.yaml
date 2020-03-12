@@ -27,8 +27,8 @@ spec: # spec do deployment
 
 --- # Após 3 dash posso declarar outro arquivo
 
-apiversion: v1
-kind: service
+apiVersion: v1
+kind: Service
 metadata:
   name: redis-service
   labels:
