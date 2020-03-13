@@ -1,31 +1,28 @@
-apiVersion: apps/v1
+
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
   name: redis-master
   labels:
     app: redis
-spec: # spec do deployment
-  replicas: 1
-
-  selector: # Selector utilizado na criação do service
+spec:
+  selector:
     matchLabels:
       app: redis
-
-  template: # template do Pod
+  replicas: 1
+  template:
     metadata:
       labels:
         app: redis
         role: master
-
-    spec: # spec do Pod
+    spec:
       containers:
-      - image: redis
-        name: master
-
+      - name: master
+        image: redis
         ports:
         - containerPort: 6379
 
---- # Após 3 dash posso declarar outro arquivo
+---
 
 apiVersion: v1
 kind: Service
@@ -36,8 +33,8 @@ metadata:
     role: master
 spec:
   ports:
-    - port: 6379
-      targetPort: 6379
+  - port: 6379
+    targetPort: 6379
   selector:
-      app: redis
-      role: master
+    app: redis
+    role: master
