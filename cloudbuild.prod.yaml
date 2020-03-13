@@ -66,7 +66,7 @@ steps:
   - id: "Adjusting deployment file k8s"
     name: "gcr.io/cloud-builders/gcloud"
     # adicionado para poder rodar comando
-    entrepoint: "/bin/sh"
+    entrypoint: "/bin/sh"
     # roda comandos
     args:
       - "-c"
