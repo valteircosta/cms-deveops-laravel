@@ -50,3 +50,7 @@ $ kubectl get secrets
 ``` 
 kubectl exec -it mysql-server-7dc4ffc46f-czbz9  bash  
 ``` 
+## Cria todos os objetos que estão declarados no diretório
+``` 
+kubectl apply -f k8s/mysql/ 
+``` 
