@@ -71,8 +71,8 @@ steps:
     args:
       - "-c"
       - |
-        sed "s#img-app-deployment#gcr.io/$PROJECT_ID/app-laravel:$SHORT_SHA#g" .k8s/app/deployment.yaml > .k8s/app/deployment-new.yaml;
-        cat .k8s/app/deployment-new.yaml;
+        sed "s#img-app-deployment#gcr.io/$PROJECT_ID/app-laravel:$SHORT_SHA#g" k8s/app/deployment.yaml > k8s/app/deployment-new.yaml;
+        cat k8s/app/deployment-new.yaml;
 
   - id: "Deployng k8s"
     name: "gcr.io/cloud-builders/kubectl"
