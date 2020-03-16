@@ -18,7 +18,7 @@ spec:
       - name: app
         image: img-app-deployment
         #Cria link entre pastas nginx
-        command: ["/bin/sh", "-c", "ln -s /var/www /usr/share/nginx; php-fpm;"]
+        command: ["/bin/sh", "-c", "ln -s /var/www /usr/share/nginx; chmod +x /var/wwww/k8s/entrypoint.sh; /var/www/k8s/entrypoint.sh; php-fpm;"]
         ports:
         - containerPort: 80
 
